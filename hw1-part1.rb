@@ -19,9 +19,39 @@
 
 def palindrome? (input)
   sanitized = input.downcase.gsub(/\W/, '')
-  puts (sanitized == sanitized.reverse)
+  (sanitized == sanitized.reverse)
+end
+#puts palindrome?("A man, a plan, a canal -- Panama")
+#palindrome?("A man, a plan, a canal -- Panama")
+#palindrome?("Madam, I'm Adam!")
+#palindrome?("Abracadabra")
+
+
+#(b) Given a string of input, return a hash whose keys are words in the string and
+#whose values are the number of times each word appears. Don't use forloops.
+#Nonwords should be ignored. Case shouldn't matter. A word is defined as a
+#string of characters between word boundaries. (Hint: the sequence \b in a Ruby
+#regexp means "word boundary".)
+#Example:
+#   count_words("A man, a plan, a canal -- Panama")
+   
+#    # => {'a' => 3, 'man' => 1, 'canal' => 1, 'panama' => 1,
+#    'plan' => 1}
+#    count_words "Doo bee doo bee doo" # => {'doo' => 3, 'bee' =>
+#    2}
+
+
+def count_words(input)
+ words = input.downcase.split(/\b/)
+ results = Hash.new(0)
+ words.each do |w|
+   if w =~ /\w/
+    results[w] += 1  
+   end
+ end 
+ results
 end
 
-palindrome?("A man, a plan, a canal -- Panama")
-palindrome?("Madam, I'm Adam!")
-palindrome?("Abracadabra")
+#puts count_words("A man, a plan, a canal -- Panama")
+#puts count_words("Doo bee doo bee doo")
+#puts count_words("there is UPPER upper case")
