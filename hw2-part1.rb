@@ -91,7 +91,10 @@ end
 class String
   def palindrome?
     sanitized = self.downcase.gsub(/\W/,'')
-    (sanitized == sanitized.reverse)
+    puts "  sanitized: " + sanitized
+    puts "  reversed: " + sanitized.reverse
+    puts (sanitized == sanitized.reverse).to_s
+    sanitized == sanitized.reverse
   end
 end
 
@@ -126,8 +129,16 @@ module Enumerable
     # not sure what to do here
     return true
     end
-    arrayified = self.to_a.to_s
-    arrayified.palindrome?
+    if(!self.is_a?(Array))
+      #puts self.to_a.to_s
+      #stringified == stringified.reverse
+      self.to_a == self.to_a.reverse
+    else
+      puts "  array: " + self.to_a.to_s
+      arrayified = self.to_a.to_s
+      #puts "array: " + arrayified
+      arrayified.palindrome?
+    end
   end
 end
 
@@ -145,6 +156,10 @@ class TestHW2Part1c < Test::Unit::TestCase
   end
 
   def test_enumerator_is_palindrome
-    assert_equal(true, "If I had a hi-fi".chars.palindrome?)  #testing Non-array enumerable)
+    input = "ifihadahifi"
+    assert_equal(true, input.chars.palindrome?)  #testing Non-array enumerable)
+  end
+  def test_non_array_enum_is_palindrome
+    assert !("If I had a hi-fi".chars.palindrome?)  #testing Non-array enumerable
   end
 end
